@@ -1,21 +1,4 @@
 module Enumerable
-  # Your code goes here
-end
-
-# You will first have to define my_each
-# on the Array class. Methods defined in
-# your enumerable module will have access
-# to this method
-class Array
-  # just wrap each with my_each
-  def my_each
-    return to_enum(__method__) unless block_given? # Return an enumerator if no block is given
-
-    self.each { |el| yield el }
-
-    self # Return the array itself
-  end
-
   # use block inside my_each_with_index
   def my_each_with_index
     return to_enum(__method__) unless block_given? # Return an enumerator if no block is given
@@ -86,5 +69,20 @@ class Array
     my_each { |el| accumulator = yield(accumulator, el) }
 
     accumulator
+  end
+end
+
+# You will first have to define my_each
+# on the Array class. Methods defined in
+# your enumerable module will have access
+# to this method
+class Array
+  # just wrap each with my_each
+  def my_each
+    return to_enum(__method__) unless block_given? # Return an enumerator if no block is given
+
+    self.each { |el| yield el }
+
+    self # Return the array itself
   end
 end
